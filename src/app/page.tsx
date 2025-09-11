@@ -43,7 +43,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
       <div
         className="fixed right-[100px] top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-cover bg-center bg-no-repeat z-0 hidden lg:block"
         style={{
@@ -123,7 +123,7 @@ export default function Home() {
                   {technologyRows.map((row, rowIndex) => (
                     <div
                       key={rowIndex}
-                      className="relative overflow-hidden"
+                      className="relative overflow-hidden w-full max-w-[300px]"
                       style={{
                         maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
                         WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
