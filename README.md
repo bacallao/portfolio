@@ -1,6 +1,6 @@
-# Minimalist Portfolio Website
+# Manuel Bacallao - Portfolio Website
 
-A clean, modern portfolio website built with Next.js and Tailwind CSS, featuring smooth animations and dark/light theme support.
+A clean, modern portfolio website showcasing my work as a Software Engineer specializing in machine learning, generative AI, and intelligent systems. Built with Next.js and Tailwind CSS, featuring smooth animations and responsive design.
 
 ## ✨ Features
 
@@ -21,7 +21,7 @@ A clean, modern portfolio website built with Next.js and Tailwind CSS, featuring
 
 \`\`\`bash
 # Clone the repository
-git clone https://github.com/felixmacaspac/v0-minimalist-portfolio.git
+git clone https://github.com/bacallao/portfolio.git
 
 # Install dependencies
 npm install
@@ -44,6 +44,13 @@ The portfolio is designed to be easily customizable:
 
 Open source and available under the [MIT License](LICENSE).
 
+## 🔗 Connect
+
+- **Email**: [bacallao2024@gmail.com](mailto:bacallao2024@gmail.com)
+- **GitHub**: [@bacallao](https://github.com/bacallao)
+- **LinkedIn**: [@manuel-bacallaop](https://www.linkedin.com/in/manuel-bacallaop/)
+- **v0.dev**: [@bacallao](https://v0.app/@bacallao)
+
 ---
 
-**Built with ❤️ using [v0.dev](https://v0.dev) by Felix Macaspac**
+**Built with ❤️ using [v0.dev](https://v0.dev) by Manuel Bacallao**
