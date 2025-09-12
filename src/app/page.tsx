@@ -68,7 +68,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10">
+      <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10 text-center lg:text-left">
         <header
           id="intro"
           ref={(el) => {
@@ -89,8 +89,8 @@ export default function Home() {
                 </h1>
               </div>
 
-              <div className="space-y-6 max-w-md">
-                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+              <div className="space-y-6 max-w-md mx-auto lg:mx-0">
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-left">
                   Software Engineer building intelligent systems at the intersection of
                   <span className="text-foreground"> machine learning</span>,
                   <span className="text-foreground"> generative AI</span>, and
@@ -107,7 +107,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
+            <div className="lg:col-span-2 flex flex-col justify-end items-center lg:items-start space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div className="space-y-4">
                 <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
                 <div className="space-y-2">
@@ -123,7 +123,7 @@ export default function Home() {
                   {technologyRows.map((row, rowIndex) => (
                     <div
                       key={rowIndex}
-                      className="relative overflow-hidden w-full max-w-[300px]"
+                      className="relative overflow-hidden w-full max-w-[260px] sm:max-w-[300px] mx-auto"
                       style={{
                         maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
                         WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
@@ -157,7 +157,7 @@ export default function Home() {
           className="min-h-screen py-20 sm:py-32 opacity-0"
         >
           <div className="space-y-12 sm:space-y-16">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 w-full max-w-xl lg:max-w-full mx-auto lg:mx-0">
               <h2 className="text-3xl sm:text-4xl font-light">Selected Work</h2>
               <div className="text-sm text-muted-foreground font-mono">2019 — {new Date().getFullYear()}</div>
             </div>
@@ -192,14 +192,14 @@ export default function Home() {
                   </div>
 
                   <div className="lg:col-span-6 space-y-3">
-                    <div>
+                    <div className="flex flex-row lg:flex-col gap-4 items-center justify-center">
                       <h3 className="text-lg sm:text-xl font-medium">{job.role}</h3>
                       <div className="text-muted-foreground">{job.company}</div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-lg">{job.description}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0 text-justify lg:text-left">{job.description}</p>
                   </div>
 
-                  <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+                  <div className="lg:col-span-4 flex flex-wrap gap-2 justify-center lg:justify-end mt-2 lg:mt-0">
                     {job.tech.map((tech) => (
                       <span
                         key={tech}
@@ -223,7 +223,7 @@ export default function Home() {
           className="min-h-screen py-20 sm:py-32 opacity-0"
         >
           <div className="space-y-12 sm:space-y-16">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 w-full max-w-xl lg:max-w-full mx-auto lg:mx-0">
               <h2 className="text-3xl sm:text-4xl font-light">Projects</h2>
               <div className="text-sm text-muted-foreground font-mono">PERSONAL WORK</div>
             </div>
@@ -243,16 +243,16 @@ export default function Home() {
                   key={index}
                   className="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500 cursor-pointer"
                 >
-                  <div className="lg:col-span-2">
+                  <div className="lg:col-span-2 text-center lg:text-left">
                     <div className="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">
                       {project.year}
                     </div>
                   </div>
 
-                  <div className="lg:col-span-6 space-y-3">
-                    <div>
+                  <div className="lg:col-span-6 space-y-3 w-full max-w-lg mx-auto lg:mx-0">
+                    <div className="flex flex-row lg:flex-col gap-4 items-center justify-between">
                       <h3 className="text-lg sm:text-xl font-medium">{project.title}</h3>
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center gap-2">
                         <div
                           className={`w-2 h-2 rounded-full ${
                             project.status === "Live" ? "bg-green-500" : "bg-yellow-500"
@@ -261,10 +261,10 @@ export default function Home() {
                         <span className="text-sm text-muted-foreground">{project.status}</span>
                       </div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-lg">{project.description}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0 text-justify">{project.description}</p>
                   </div>
 
-                  <div className="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+                  <div className="lg:col-span-4 flex flex-wrap gap-2 justify-center lg:justify-end mt-2 lg:mt-0">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
@@ -297,7 +297,7 @@ export default function Home() {
           <div className="space-y-12 sm:space-y-16">
             <h2 className="text-3xl sm:text-4xl font-light">Recent Thoughts</h2>
 
-            <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 justify-items-center lg:justify-items-stretch">
               {[
                 {
                   title: "The Future of Web Development",
@@ -326,7 +326,7 @@ export default function Home() {
               ].map((post, index) => (
                 <article
                   key={index}
-                  className="group p-6 sm:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
+                  className="group w-full max-w-md lg:max-w-none p-6 sm:p-8 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-500 hover:shadow-lg cursor-pointer"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
@@ -370,12 +370,12 @@ export default function Home() {
           }}
           className="py-20 sm:py-32 opacity-0"
         >
-          <div className="grid lg:grid-cols-2 gap-12 sm:gap-16">
+          <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 justify-items-center lg:justify-items-start">
             <div className="space-y-6 sm:space-y-8">
               <h2 className="text-3xl sm:text-4xl font-light">Let's Connect</h2>
 
               <div className="space-y-6">
-                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-left lg:text-justify w-full max-w-md">
                   Always interested in new opportunities, collaborations, and conversations about technology and design.
                 </p>
 
