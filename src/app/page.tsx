@@ -165,7 +165,7 @@ export default function Home() {
             <div className="space-y-8 sm:space-y-12">
               {[
                 {
-                  year: "2023",
+                  year: "2024",
                   role: "Software Engineer",
                   company: "Directable",
                   description:
@@ -173,7 +173,15 @@ export default function Home() {
                   tech: ["C# & TypeScript", "Next.js", "ASP.NET Core"],
                 },
                 {
-                  year: "2021",
+                  year: "2024",
+                  role: "Software Developer",
+                  company: "Georgia Tech’s Lab of Interactive Computing ",
+                  description:
+                    "Utilized Python and its NetworkX graph structure library to develop efficient algorithms to optimize resource flow in a simulation in which a natural disaster strikes a city. Developed the graphical user interface on PyGame to allow the users to visualize the results",
+                  tech: ["Python", "NumPy", "Pandas", "TensorFlow"],
+                },
+                {
+                  year: "2023",
                   role: "University Project",
                   company: "Avangenio",
                   description:
