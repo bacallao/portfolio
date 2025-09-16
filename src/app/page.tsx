@@ -1,46 +1,46 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(true)
-  const [activeSection, setActiveSection] = useState("")
-  const sectionsRef = useRef<(HTMLElement | null)[]>([])
+  const [isDark, setIsDark] = useState(true);
+  const [activeSection, setActiveSection] = useState("");
+  const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark)
-  }, [isDark])
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up")
-            setActiveSection(entry.target.id)
+            entry.target.classList.add("animate-fade-in-up");
+            setActiveSection(entry.target.id);
           }
-        })
+        });
       },
-      { threshold: 0.3, rootMargin: "0px 0px -20% 0px" },
-    )
+      { threshold: 0.3, rootMargin: "0px 0px -20% 0px" }
+    );
 
     sectionsRef.current.forEach((section) => {
-      if (section) observer.observe(section)
-    })
+      if (section) observer.observe(section);
+    });
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const toggleTheme = () => {
-    setIsDark(!isDark)
-  }
+    setIsDark(!isDark);
+  };
 
   const technologyRows = [
     ["PostgreSQL", "React", "Next.js", "TypeScript", "Python"],
     ["Node.js", "Prisma", "Flask", "Ollama", "LangChain"],
     ["Hugging Face", "TensorFlow", "Docker", "AWS", "Git"],
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
@@ -48,23 +48,33 @@ export default function Home() {
         className="fixed right-[100px] top-1/2 -translate-y-1/2 w-1/3 h-2/3 bg-cover bg-center bg-no-repeat z-0 hidden lg:block"
         style={{
           backgroundImage: "url(/images/ascii-building.png)",
-          maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
         }}
       />
 
       <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
         <div className="flex flex-col gap-4">
-          {["intro", "work", "projects", "thoughts", "connect"].map((section) => (
-            <button
-              key={section}
-              onClick={() => document.getElementById(section)?.scrollIntoView({ behavior: "smooth" })}
-              className={`w-2 h-8 rounded-full transition-all duration-500 ${
-                activeSection === section ? "bg-foreground" : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
-              }`}
-              aria-label={`Navigate to ${section}`}
-            />
-          ))}
+          {["intro", "work", "projects", "thoughts", "connect"].map(
+            (section) => (
+              <button
+                key={section}
+                onClick={() =>
+                  document
+                    .getElementById(section)
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className={`w-2 h-8 rounded-full transition-all duration-500 ${
+                  activeSection === section
+                    ? "bg-foreground"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                }`}
+                aria-label={`Navigate to ${section}`}
+              />
+            )
+          )}
         </div>
       </nav>
 
@@ -72,7 +82,7 @@ export default function Home() {
         <header
           id="intro"
           ref={(el) => {
-            sectionsRef.current[0] = el
+            sectionsRef.current[0] = el;
           }}
           className="min-h-screen flex items-center opacity-0"
         >
@@ -91,7 +101,8 @@ export default function Home() {
 
               <div className="space-y-6 max-w-md mx-auto lg:mx-0">
                 <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-left">
-                  Software Engineer building intelligent systems at the intersection of
+                  Software Engineer building intelligent systems at the
+                  intersection of
                   <span className="text-foreground"> machine learning</span>,
                   <span className="text-foreground"> generative AI</span>, and
                   <span className="text-foreground"> human creativity</span>.
@@ -109,28 +120,40 @@ export default function Home() {
 
             <div className="lg:col-span-2 flex flex-col justify-end items-center lg:items-start space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">CURRENTLY</div>
+                <div className="text-sm text-muted-foreground font-mono">
+                  CURRENTLY
+                </div>
                 <div className="space-y-2">
                   <div className="text-foreground">Software Engineer</div>
                   <div className="text-muted-foreground">@ Appluex</div>
-                  <div className="text-xs text-muted-foreground">2024 — Present</div>
+                  <div className="text-xs text-muted-foreground">
+                    2024 — Present
+                  </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="text-sm text-muted-foreground font-mono">FOCUS</div>
+                <div className="text-sm text-muted-foreground font-mono">
+                  FOCUS
+                </div>
                 <div className="space-y-3">
                   {technologyRows.map((row, rowIndex) => (
                     <div
                       key={rowIndex}
                       className="relative overflow-hidden w-full max-w-[260px] sm:max-w-[300px] mx-auto"
                       style={{
-                        maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-                        WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                        maskImage:
+                          "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                        WebkitMaskImage:
+                          "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
                       }}
                     >
                       <div
-                        className={`flex gap-2 w-[200%] ${rowIndex % 2 === 0 ? "animate-scroll-left" : "animate-scroll-right"}`}
+                        className={`flex gap-2 w-[200%] ${
+                          rowIndex % 2 === 0
+                            ? "animate-scroll-left"
+                            : "animate-scroll-right"
+                        }`}
                       >
                         {[...row, ...row].map((skill, index) => (
                           <span
@@ -152,25 +175,27 @@ export default function Home() {
         <section
           id="work"
           ref={(el) => {
-            sectionsRef.current[1] = el
+            sectionsRef.current[1] = el;
           }}
           className="min-h-screen py-20 sm:py-32 opacity-0"
         >
           <div className="space-y-12 sm:space-y-16">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 w-full max-w-xl lg:max-w-full mx-auto lg:mx-0">
               <h2 className="text-3xl sm:text-4xl font-light">Selected Work</h2>
-              <div className="text-sm text-muted-foreground font-mono">2019 — {new Date().getFullYear()}</div>
+              <div className="text-sm text-muted-foreground font-mono">
+                2019 — {new Date().getFullYear()}
+              </div>
             </div>
 
             <div className="space-y-8 sm:space-y-12">
               {[
                 {
-                  year: "2024",
-                  role: "Software Engineer",
-                  company: "Directable",
+                  year: "2025",
+                  role: "Software Developer",
+                  company: "Appluex",
                   description:
-                    "Joined Directable as a Software Engineer, contributing to the development of a platform that enables businesses to create ads in an integrated editor and stream them in real time across distributed TVs and screens.",
-                  tech: ["C# & TypeScript", "Next.js", "ASP.NET Core"],
+                    "Built and optimized full-stack applications using React, Node.js, and REST/GraphQL APIs with secure, scalable back-end architectures (microservices, Docker, AWS). Streamlined delivery through CI/CD automation (GitHub Actions, AWS) and integrated third-party APIs (payments, geolocation, authentication), reducing release times by 40% and enhancing client satisfaction.",
+                  tech: ["React", "Node.js", "GraphQL", "Docker", "AWS"],
                 },
                 {
                   year: "2024",
@@ -181,12 +206,12 @@ export default function Home() {
                   tech: ["Python", "NumPy", "Pandas", "TensorFlow"],
                 },
                 {
-                  year: "2023",
-                  role: "University Project",
-                  company: "Avangenio",
+                  year: "2024",
+                  role: "Software Engineer",
+                  company: "Directable",
                   description:
-                    "Collaborated with a team to design an AI project integrating mathematical modeling and machine learning techniques. Applied linear algebra, probability, and optimization to develop algorithms and present analytical findings.",
-                  tech: ["Python", "NumPy", "Pandas", "TensorFlow"],
+                    "Joined Directable as a Software Engineer, contributing to the development of a platform that enables businesses to create ads in an integrated editor and stream them in real time across distributed TVs and screens.",
+                  tech: ["C# & TypeScript", "Next.js", "ASP.NET Core"],
                 },
               ].map((job, index) => (
                 <div
@@ -201,10 +226,14 @@ export default function Home() {
 
                   <div className="lg:col-span-6 space-y-3">
                     <div className="flex flex-row lg:flex-col gap-4 items-center justify-center">
-                      <h3 className="text-lg sm:text-xl font-medium">{job.role}</h3>
+                      <h3 className="text-lg sm:text-xl font-medium">
+                        {job.role}
+                      </h3>
                       <div className="text-muted-foreground">{job.company}</div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0 text-justify lg:text-left">{job.description}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0 text-justify lg:text-left">
+                      {job.description}
+                    </p>
                   </div>
 
                   <div className="lg:col-span-4 flex flex-wrap gap-2 justify-center lg:justify-end mt-2 lg:mt-0">
@@ -226,14 +255,16 @@ export default function Home() {
         <section
           id="projects"
           ref={(el) => {
-            sectionsRef.current[2] = el
+            sectionsRef.current[2] = el;
           }}
           className="min-h-screen py-20 sm:py-32 opacity-0"
         >
           <div className="space-y-12 sm:space-y-16">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 w-full max-w-xl lg:max-w-full mx-auto lg:mx-0">
               <h2 className="text-3xl sm:text-4xl font-light">Projects</h2>
-              <div className="text-sm text-muted-foreground font-mono">PERSONAL WORK</div>
+              <div className="text-sm text-muted-foreground font-mono">
+                PERSONAL WORK
+              </div>
             </div>
 
             <div className="space-y-8 sm:space-y-12">
@@ -245,6 +276,14 @@ export default function Home() {
                     "An AI Fitness Assistant that leverages state-of-the-art models to help users achieve their fitness goals through science-driven, deterministic algorithms, while remaining adaptable to each individual's needs.",
                   tech: ["TypeScript", "Python", "OpenAI API", "Next.JS"],
                   status: "In Progress",
+                },
+                {
+                  year: "2023",
+                  title: "University Project - Avangenio",
+                  description:
+                    "Collaborated with a team to design an AI project integrating mathematical modeling and machine learning techniques. Applied linear algebra, probability, and optimization to develop algorithms and present analytical findings.",
+                  tech: ["Python", "NumPy", "Pandas", "TensorFlow"],
+                  status: "Live",
                 },
               ].map((project, index) => (
                 <div
@@ -259,17 +298,25 @@ export default function Home() {
 
                   <div className="lg:col-span-6 space-y-3 w-full max-w-lg mx-auto lg:mx-0">
                     <div className="flex flex-row lg:flex-col gap-4 items-center justify-between">
-                      <h3 className="text-lg sm:text-xl font-medium">{project.title}</h3>
+                      <h3 className="text-lg sm:text-xl font-medium">
+                        {project.title}
+                      </h3>
                       <div className="flex items-center gap-2">
                         <div
                           className={`w-2 h-2 rounded-full ${
-                            project.status === "Live" ? "bg-green-500" : "bg-yellow-500"
+                            project.status === "Live"
+                              ? "bg-green-500"
+                              : "bg-yellow-500"
                           }`}
                         ></div>
-                        <span className="text-sm text-muted-foreground">{project.status}</span>
+                        <span className="text-sm text-muted-foreground">
+                          {project.status}
+                        </span>
                       </div>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0 text-justify">{project.description}</p>
+                    <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0 text-justify">
+                      {project.description}
+                    </p>
                   </div>
 
                   <div className="lg:col-span-4 flex flex-wrap gap-2 justify-center lg:justify-end mt-2 lg:mt-0">
@@ -298,7 +345,7 @@ export default function Home() {
         <section
           id="thoughts"
           ref={(el) => {
-            sectionsRef.current[3] = el
+            sectionsRef.current[3] = el;
           }}
           className="min-h-screen py-20 sm:py-32 opacity-0"
         >
@@ -309,25 +356,29 @@ export default function Home() {
               {[
                 {
                   title: "The Future of Web Development",
-                  excerpt: "Exploring how AI and automation are reshaping the way we build for the web.",
+                  excerpt:
+                    "Exploring how AI and automation are reshaping the way we build for the web.",
                   date: "Dec 2024",
                   readTime: "5 min",
                 },
                 {
                   title: "Design Systems at Scale",
-                  excerpt: "Lessons learned from building and maintaining design systems across multiple products.",
+                  excerpt:
+                    "Lessons learned from building and maintaining design systems across multiple products.",
                   date: "Nov 2024",
                   readTime: "8 min",
                 },
                 {
                   title: "Performance-First Development",
-                  excerpt: "Why performance should be a first-class citizen in your development workflow.",
+                  excerpt:
+                    "Why performance should be a first-class citizen in your development workflow.",
                   date: "Oct 2024",
                   readTime: "6 min",
                 },
                 {
                   title: "The Art of Code Review",
-                  excerpt: "Building better software through thoughtful and constructive code reviews.",
+                  excerpt:
+                    "Building better software through thoughtful and constructive code reviews.",
                   date: "Sep 2024",
                   readTime: "4 min",
                 },
@@ -346,7 +397,9 @@ export default function Home() {
                       {post.title}
                     </h3>
 
-                    <p className="text-muted-foreground leading-relaxed">{post.excerpt}</p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {post.excerpt}
+                    </p>
 
                     <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                       <span>Read more</span>
@@ -374,7 +427,7 @@ export default function Home() {
         <section
           id="connect"
           ref={(el) => {
-            sectionsRef.current[4] = el
+            sectionsRef.current[4] = el;
           }}
           className="py-20 sm:py-32 opacity-0"
         >
@@ -384,7 +437,8 @@ export default function Home() {
 
               <div className="space-y-6">
                 <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed text-left lg:text-justify w-full max-w-md">
-                  Always interested in new opportunities, collaborations, and conversations about technology and design.
+                  Always interested in new opportunities, collaborations, and
+                  conversations about technology and design.
                 </p>
 
                 <div className="space-y-4">
@@ -393,7 +447,9 @@ export default function Home() {
                     className="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300"
                     aria-label="Send email to bacallao2024@gmail.com"
                   >
-                    <span className="text-base sm:text-lg">bacallao2024@gmail.com</span>
+                    <span className="text-base sm:text-lg">
+                      bacallao2024@gmail.com
+                    </span>
                     <svg
                       className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                       fill="none"
@@ -401,7 +457,12 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       aria-hidden="true"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
                     </svg>
                   </Link>
                 </div>
@@ -409,12 +470,22 @@ export default function Home() {
             </div>
 
             <div className="space-y-6 sm:space-y-8">
-              <h3 className="text-sm text-muted-foreground font-mono">ELSEWHERE</h3>
+              <h3 className="text-sm text-muted-foreground font-mono">
+                ELSEWHERE
+              </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
                 {[
-                  { name: "GitHub", handle: "@bacallao", url: "https://github.com/bacallao" },
-                  { name: "v0.dev", handle: "@bacallao", url: "https://v0.app/@bacallao" },
+                  {
+                    name: "GitHub",
+                    handle: "@bacallao",
+                    url: "https://github.com/bacallao",
+                  },
+                  {
+                    name: "v0.dev",
+                    handle: "@bacallao",
+                    url: "https://v0.app/@bacallao",
+                  },
                   {
                     name: "LinkedIn",
                     handle: "@manuel-bacallaop",
@@ -433,11 +504,39 @@ export default function Home() {
                       <div className="text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                         {social.name}
                       </div>
-                      <div className="text-sm text-muted-foreground">{social.handle}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {social.handle}
+                      </div>
                     </div>
                   </Link>
                 ))}
               </div>
+            </div>
+            <div className="flex justify-center">
+              <Link
+                href="/resume.docx.pdf"
+                download="Manuel_Bacallao_Resume.pdf"
+                className="group inline-flex items-center gap-3 px-6 py-3 border border-border rounded-lg hover:border-muted-foreground/50 transition-all duration-300 hover:shadow-sm text-foreground hover:text-muted-foreground"
+                aria-label="Download Manuel Bacallao's resume"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                <span className="text-sm font-mono uppercase tracking-wider">
+                  Download Resume
+                </span>
+              </Link>
             </div>
           </div>
         </section>
@@ -445,8 +544,12 @@ export default function Home() {
         <footer className="py-12 sm:py-16 border-t border-border">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
             <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">© 2025 Manuel Bacallao. All rights reserved.</div>
-              <div className="text-xs text-muted-foreground">Built with v0.dev</div>
+              <div className="text-sm text-muted-foreground">
+                © 2025 Manuel Bacallao. All rights reserved.
+              </div>
+              <div className="text-xs text-muted-foreground">
+                Built with v0.dev
+              </div>
             </div>
           </div>
         </footer>
@@ -454,5 +557,5 @@ export default function Home() {
 
       <div className="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
     </div>
-  )
+  );
 }
