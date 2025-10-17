@@ -29,7 +29,7 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
     <aside
       aria-label="Cursor Agent Sidebar"
       className={cn(
-        "h-full w-[280px] max-w-full border-l border-gray-300 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70",
+        "h-full w-[280px] max-w-full border-l border-gray-300 bg-white",
         "flex flex-col",
         className
       )}

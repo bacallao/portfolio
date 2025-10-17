@@ -1,126 +1,156 @@
 "use client";
 
-import React from "react";
-import { cn } from "@/src/lib/utils";
+import React, { useEffect, useRef, useState } from "react";
 import EditorHeader from "@/src/components/editor-header";
 import { FileExplorerSidebar } from "@/src/components/file-explorer-sidebar";
 import CursorSidebar from "@/src/components/cursor-sidebar";
 import { CursorTerminal } from "@/src/components/cursor-terminal";
 import EditorFooter from "@/src/components/editor-footer";
 
-type CursorWorkbenchProps = {
-  /** Additional classes applied to the scaling wrapper (not the inner layout). */
-  className?: string;
-  /** Size classes for the inner workbench layout (e.g. width/height). Defaults to a desktop-like frame. */
-  containerClassName?: string;
-  /** Starting scale when the page first loads (zoomed-in). 1 means no zoom. */
-  initialScale?: number;
-  /** How far the user must scroll for the zoom to complete, in vh units. */
-  scrollDistanceVh?: number;
-};
+/**
+ * CursorWorkbench composes the existing Cursor-like subcomponents into a single layout
+ * and places the provided video as a full-bleed background. It does not modify the
+ * subcomponents themselves; only positional wrappers and z-indexing are applied.
+ * 
+ * Features scroll-based zoom effect: video starts fullscreen and zooms out as user scrolls.
+ */
+export default function CursorWorkbench() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-export default function CursorWorkbench({
-  className,
-  containerClassName,
-  initialScale = 1.8,
-  scrollDistanceVh = 180,
-}: CursorWorkbenchProps) {
-  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
-  const [progress, setProgress] = React.useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
 
-  React.useEffect(() => {
-    function clamp(v: number, min: number, max: number) {
-      return Math.max(min, Math.min(max, v));
-    }
-    let raf = 0;
-    const onScroll = () => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const el = wrapperRef.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const vh = typeof window !== "undefined" ? window.innerHeight : 1;
-        const total = rect.height - vh;
-        if (total <= 0) {
-          setProgress(1);
-          return;
-        }
-        const p = clamp((-rect.top) / total, 0, 1);
-        setProgress(p);
-      });
+      const scrollTop = window.scrollY;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      
+      // Calculate progress (0 to 1) over the first portion of scroll
+      // Zoom out completes in the first 50% of total scroll
+      const progress = Math.min(scrollTop / (scrollHeight * 0.5), 1);
+      setScrollProgress(progress);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Ease-out cubic for a natural deceleration
-  const eased = 1 - Math.pow(1 - progress, 3);
-  const scale = initialScale - (initialScale - 1) * eased;
+  // Calculate transformations based on scroll progress
+  // Video: starts at scale(3.5) to cover full viewport from center column, zooms out to scale(1)
+  const videoScale = 1 + (2.5 * (1 - scrollProgress)); // 3.5 -> 1
+
+  // UI elements: start off-screen and move in
+  const headerTranslateY = -100 * (1 - scrollProgress); // -100% -> 0%
+  const footerTranslateY = 100 * (1 - scrollProgress); // 100% -> 0%
+  const leftSidebarTranslateX = -100 * (1 - scrollProgress); // -100% -> 0%
+  const rightSidebarTranslateX = 100 * (1 - scrollProgress); // 100% -> 0%
+  const terminalTranslateY = 100 * (1 - scrollProgress); // 100% -> 0%
+  const elementsOpacity = scrollProgress; // 0 -> 1
 
   return (
-    <div ref={wrapperRef} style={{ height: `${scrollDistanceVh}vh` }}>
-      <div className="sticky top-0 h-screen overflow-hidden bg-black">
-        <div className="flex h-screen w-screen items-center justify-center">
+    <>
+      {/* Spacer to enable scrolling */}
+      <div style={{ height: "200vh" }} />
+      
+      {/* Full-screen video layer - positioned to fill entire viewport */}
+      <div 
+        className="fixed inset-0"
+        style={{ 
+          zIndex: 0,
+          backgroundColor: 'black',
+          pointerEvents: 'none'
+        }}
+      >
+        <video
+          aria-label="Background editor video"
+          className="w-full h-full object-cover"
+          style={{
+            transform: `scale(${videoScale})`,
+            transformOrigin: 'center center',
+            transition: 'none'
+          }}
+          src="/videos/video.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </div>
+      
+      {/* UI layer with video background */}
+      <div 
+        ref={containerRef}
+        className="fixed inset-0 flex flex-col"
+        style={{ zIndex: 1 }}
+      >
+        {/* Header */}
+        <div 
+          style={{
+            transform: `translateY(${headerTranslateY}%)`,
+            opacity: elementsOpacity,
+            transition: 'none'
+          }}
+        >
+          <EditorHeader />
+        </div>
+
+        {/* Middle row: left sidebar, center content, right sidebar */}
+        <div className="flex flex-1 min-h-0 overflow-hidden">
+          {/* Left sidebar */}
           <div
-            className={cn("origin-center", className)}
-            style={{ transform: `scale(${scale})`, willChange: "transform" }}
+            style={{
+              transform: `translateX(${leftSidebarTranslateX}%)`,
+              opacity: elementsOpacity,
+              transition: 'none'
+            }}
+            className="hidden lg:flex"
           >
-            <WorkbenchContent
-              className={
-                containerClassName ??
-                // Default desktop-like frame; parent may override via containerClassName
-                "w-[1200px] h-[740px]"
-              }
-            />
+            <CursorSidebar className="flex" />
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
-function WorkbenchContent({ className }: { className?: string }) {
-  return (
-    <div className={cn("flex h-full w-full flex-col bg-background", className)}>
-      {/* Header */}
-      <EditorHeader />
-
-      {/* Middle row: left sidebar, center content (video + terminal), right sidebar */}
-      <div className="flex flex-1 min-h-0">
-        {/* Left sidebar (contained between header and footer) */}
-        <CursorSidebar className="hidden lg:flex" />
-
-        {/* Center column: video fills available space above terminal */}
-        <div className="flex min-w-0 flex-1 flex-col">
-          <div className="relative flex-1 min-h-0">
-            <video
-              aria-label="Background editor video"
-              className="absolute inset-0 h-full w-full object-cover"
-              src="/videos/video.mov"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
+          {/* Center column: transparent space for video, with terminal at bottom */}
+          <div className="flex min-w-0 flex-1 flex-col relative">
+            {/* Terminal - positioned at bottom */}
+            <div 
+              className="mt-auto shrink-0 relative"
+              style={{
+                transform: `translateY(${terminalTranslateY}%)`,
+                opacity: elementsOpacity,
+                transition: 'none',
+                zIndex: 1
+              }}
+            >
+              <CursorTerminal />
+            </div>
           </div>
-          <div className="shrink-0">
-            <CursorTerminal />
+
+          {/* Right sidebar */}
+          <div
+            style={{
+              transform: `translateX(${rightSidebarTranslateX}%)`,
+              opacity: elementsOpacity,
+              transition: 'none'
+            }}
+            className="hidden lg:flex"
+          >
+            <FileExplorerSidebar className="flex" />
           </div>
         </div>
 
-        {/* Right sidebar (contained between header and footer) */}
-        <FileExplorerSidebar className="hidden lg:flex" />
+        {/* Footer */}
+        <div
+          style={{
+            transform: `translateY(${footerTranslateY}%)`,
+            opacity: elementsOpacity,
+            transition: 'none'
+          }}
+        >
+          <EditorFooter />
+        </div>
       </div>
-
-      {/* Footer */}
-      <EditorFooter />
-    </div>
+    </>
   );
 }
 
