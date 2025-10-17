@@ -46,9 +46,9 @@ export function EditorFooter({
     <div
       className={cn(
         // Opaque background so underlying content doesn't show through
-        "w-full bg-background text-[11px] text-gray-600 border-t",
+        "w-full bg-background text-[11px] text-gray-600",
         "flex items-center h-7 select-none pr-3",
-        "",
+        "border", // Add all borders
         className
       )}
       aria-label="Editor status bar"
@@ -63,7 +63,10 @@ export function EditorFooter({
         {/* Branch + star + refresh */}
         <BarItem>
           <GitBranch className="h-3.5 w-3.5" />
-          <span className="truncate max-w-[18ch]">{branch}{showModifiedStar ? " *" : ""}</span>
+          <span className="truncate max-w-[18ch]">
+            {branch}
+            {showModifiedStar ? " *" : ""}
+          </span>
           <RefreshCcw className="h-3.5 w-3.5" />
         </BarItem>
 
@@ -76,7 +79,6 @@ export function EditorFooter({
         </BarItem>
       </div>
 
-      {/* Right cluster */}
       {/* Right cluster */}
       <div className="ml-auto flex items-center gap-3 h-full">
         <BarItem>
@@ -121,5 +123,4 @@ function BarItem({ children, className }: { children: React.ReactNode; className
 }
 
 export default EditorFooter;
-
 

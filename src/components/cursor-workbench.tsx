@@ -8,11 +8,12 @@ import { CursorTerminal } from "@/src/components/cursor-terminal";
 import EditorFooter from "@/src/components/editor-footer";
 
 interface CursorWorkbenchProps {
+  width?: string | number;
+  height?: string | number;
   className?: string;
-  style?: React.CSSProperties;
 }
 
-export default function CursorWorkbench({ className, style }: CursorWorkbenchProps) {
+export default function CursorWorkbench({ width = '90vw', height = '90vh', className }: CursorWorkbenchProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
@@ -21,7 +22,6 @@ export default function CursorWorkbench({ className, style }: CursorWorkbenchPro
     const handleScroll = () => {
       if (!stickyRef.current || !containerRef.current) return;
 
-      const stickyRect = stickyRef.current.getBoundingClientRect();
       const containerRect = containerRef.current.getBoundingClientRect();
       
       // Calculate how much the sticky container has been scrolled through
@@ -51,14 +51,21 @@ export default function CursorWorkbench({ className, style }: CursorWorkbenchPro
   const terminalTranslateY = 100 * (1 - scrollProgress);
   const elementsOpacity = scrollProgress;
 
+  // Container dimensions: transition from fullscreen to specified dimensions
+  const containerWidth = scrollProgress === 1 ? width : '100vw';
+  const containerHeight = scrollProgress === 1 ? height : '100vh';
+
   return (
     <div 
       ref={containerRef}
       className={className}
       style={{
         position: 'relative',
-        height: '200vh', // Double viewport height to give scroll space for animation
-        ...style
+        // Ensure animation completes fully: 100vh for sticky element + 100vh of scroll distance
+        minHeight: '200vh',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center'
       }}
     >
       <div 
@@ -66,9 +73,12 @@ export default function CursorWorkbench({ className, style }: CursorWorkbenchPro
         style={{
           position: 'sticky',
           top: 0,
-          height: '100vh',
+          width: containerWidth,
+          height: containerHeight,
+          margin: '0 auto',
           backgroundColor: 'black',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          transition: scrollProgress > 0.9 ? 'width 0.3s ease-out, height 0.3s ease-out' : 'none'
         }}
       >
       {/* Video layer */}

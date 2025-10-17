@@ -53,7 +53,7 @@ export function EditorHeader({
   return (
     <div
       className={cn(
-        "relative flex h-10 w-full items-center border-b bg-white px-2 text-sm text-gray-600",
+        "relative flex h-10 w-full items-center border border-gray-300 bg-white px-2 text-sm text-gray-600", // add all borders
         className
       )}
       aria-label="Editor title bar"

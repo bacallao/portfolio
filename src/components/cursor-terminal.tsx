@@ -66,7 +66,7 @@ export function CursorTerminal({
   return (
     <div
       className={cn(
-        "border-x border-t bg-card text-gray-600",
+        "border-x border-t border-gray-300 bg-card text-gray-600",
         "flex h-[160px] min-h-[110px] flex-col overflow-hidden",
         className
       )}
@@ -75,7 +75,7 @@ export function CursorTerminal({
       <div
         className={cn(
           "flex items-center gap-2 px-3",
-          withTopDivider ? "border-b" : null,
+          withTopDivider ? "border-b border-gray-300" : null,
           "bg-background/40"
         )}
       >
