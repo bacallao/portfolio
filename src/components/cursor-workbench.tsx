@@ -7,27 +7,30 @@ import CursorSidebar from "@/src/components/cursor-sidebar";
 import { CursorTerminal } from "@/src/components/cursor-terminal";
 import EditorFooter from "@/src/components/editor-footer";
 
-/**
- * CursorWorkbench composes the existing Cursor-like subcomponents into a single layout
- * and places the provided video as a full-bleed background. It does not modify the
- * subcomponents themselves; only positional wrappers and z-indexing are applied.
- * 
- * Features scroll-based zoom effect: video starts fullscreen and zooms out as user scrolls.
- */
-export default function CursorWorkbench() {
+interface CursorWorkbenchProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export default function CursorWorkbench({ className, style }: CursorWorkbenchProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!stickyRef.current || !containerRef.current) return;
 
-      const scrollTop = window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const stickyRect = stickyRef.current.getBoundingClientRect();
+      const containerRect = containerRef.current.getBoundingClientRect();
       
-      // Calculate progress (0 to 1) over the first portion of scroll
-      // Zoom out completes in the first 50% of total scroll
-      const progress = Math.min(scrollTop / (scrollHeight * 0.5), 1);
+      // Calculate how much the sticky container has been scrolled through
+      const scrollStart = containerRect.top;
+      const scrollRange = containerRect.height - window.innerHeight;
+      
+      // Progress from 0 (animation start) to 1 (animation complete)
+      const progress = Math.max(0, Math.min(1, -scrollStart / scrollRange));
+      
       setScrollProgress(progress);
     };
 
@@ -38,31 +41,38 @@ export default function CursorWorkbench() {
   }, []);
 
   // Calculate transformations based on scroll progress
-  // Video: starts at scale(3.5) to cover full viewport from center column, zooms out to scale(1)
   const videoScale = 1 + (2.5 * (1 - scrollProgress)); // 3.5 -> 1
 
   // UI elements: start off-screen and move in
-  const headerTranslateY = -100 * (1 - scrollProgress); // -100% -> 0%
-  const footerTranslateY = 100 * (1 - scrollProgress); // 100% -> 0%
-  const leftSidebarTranslateX = -100 * (1 - scrollProgress); // -100% -> 0%
-  const rightSidebarTranslateX = 100 * (1 - scrollProgress); // 100% -> 0%
-  const terminalTranslateY = 100 * (1 - scrollProgress); // 100% -> 0%
-  const elementsOpacity = scrollProgress; // 0 -> 1
+  const headerTranslateY = -100 * (1 - scrollProgress);
+  const footerTranslateY = 100 * (1 - scrollProgress);
+  const leftSidebarTranslateX = -100 * (1 - scrollProgress);
+  const rightSidebarTranslateX = 100 * (1 - scrollProgress);
+  const terminalTranslateY = 100 * (1 - scrollProgress);
+  const elementsOpacity = scrollProgress;
 
   return (
-    <>
-      {/* Spacer to enable scrolling */}
-      <div style={{ height: "200vh" }} />
-      
-      {/* Full-screen video layer - positioned to fill entire viewport */}
+    <div 
+      ref={containerRef}
+      className={className}
+      style={{
+        position: 'relative',
+        height: '200vh', // Double viewport height to give scroll space for animation
+        ...style
+      }}
+    >
       <div 
-        className="fixed inset-0"
-        style={{ 
-          zIndex: 0,
+        ref={stickyRef}
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
           backgroundColor: 'black',
-          pointerEvents: 'none'
+          overflow: 'hidden'
         }}
       >
+      {/* Video layer */}
+      <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <video
           aria-label="Background editor video"
           className="w-full h-full object-cover"
@@ -79,12 +89,8 @@ export default function CursorWorkbench() {
         />
       </div>
       
-      {/* UI layer with video background */}
-      <div 
-        ref={containerRef}
-        className="fixed inset-0 flex flex-col"
-        style={{ zIndex: 1 }}
-      >
+      {/* UI layer */}
+      <div className="relative flex flex-col h-full" style={{ zIndex: 1 }}>
         {/* Header */}
         <div 
           style={{
@@ -110,9 +116,9 @@ export default function CursorWorkbench() {
             <CursorSidebar className="flex" />
           </div>
 
-          {/* Center column: transparent space for video, with terminal at bottom */}
+          {/* Center column */}
           <div className="flex min-w-0 flex-1 flex-col relative">
-            {/* Terminal - positioned at bottom */}
+            {/* Terminal */}
             <div 
               className="mt-auto shrink-0 relative"
               style={{
@@ -150,7 +156,8 @@ export default function CursorWorkbench() {
           <EditorFooter />
         </div>
       </div>
-    </>
+      </div>
+    </div>
   );
 }
 
