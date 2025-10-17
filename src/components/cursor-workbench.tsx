@@ -10,10 +10,11 @@ import EditorFooter from "@/src/components/editor-footer";
 interface CursorWorkbenchProps {
   width?: string | number;
   height?: string | number;
+  marginTop?: string | number;
   className?: string;
 }
 
-export default function CursorWorkbench({ width = '90vw', height = '90vh', className }: CursorWorkbenchProps) {
+export default function CursorWorkbench({ width = '90vw', height = '90vh', marginTop = 0, className }: CursorWorkbenchProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
   // Container dimensions: transition from fullscreen to specified dimensions
   const containerWidth = scrollProgress === 1 ? width : '100vw';
   const containerHeight = scrollProgress === 1 ? height : '100vh';
+  const containerMarginTop = scrollProgress === 1 ? marginTop : 0;
 
   return (
     <div 
@@ -72,13 +74,14 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
         ref={stickyRef}
         style={{
           position: 'sticky',
-          top: 0,
+          top: containerMarginTop,
           width: containerWidth,
           height: containerHeight,
-          margin: '0 auto',
+          marginLeft: 'auto',
+          marginRight: 'auto',
           backgroundColor: 'black',
           overflow: 'hidden',
-          transition: scrollProgress > 0.9 ? 'width 0.3s ease-out, height 0.3s ease-out' : 'none'
+          transition: scrollProgress > 0.9 ? 'width 0.3s ease-out, height 0.3s ease-out, top 0.3s ease-out' : 'none'
         }}
       >
       {/* Video layer */}
@@ -105,7 +108,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
         <div 
           style={{
             transform: `translateY(${headerTranslateY}%)`,
-            opacity: elementsOpacity,
+            opacity: 1,
             transition: 'none'
           }}
         >
@@ -118,7 +121,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
           <div
             style={{
               transform: `translateX(${leftSidebarTranslateX}%)`,
-              opacity: elementsOpacity,
+              opacity: 1,
               transition: 'none'
             }}
             className="hidden lg:flex"
@@ -133,7 +136,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
               className="mt-auto shrink-0 relative"
               style={{
                 transform: `translateY(${terminalTranslateY}%)`,
-                opacity: elementsOpacity,
+                opacity: 1,
                 transition: 'none',
                 zIndex: 1
               }}
@@ -146,7 +149,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
           <div
             style={{
               transform: `translateX(${rightSidebarTranslateX}%)`,
-              opacity: elementsOpacity,
+              opacity: 1,
               transition: 'none'
             }}
             className="hidden lg:flex"
@@ -159,7 +162,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', class
         <div
           style={{
             transform: `translateY(${footerTranslateY}%)`,
-            opacity: elementsOpacity,
+            opacity: 1,
             transition: 'none'
           }}
         >

@@ -5,7 +5,7 @@ import CursorWorkbench from "@/src/components/cursor-workbench";
 
 export default function DeveloperBase() {
   return <>
-  <CursorWorkbench width="90vw" height="90vh" />
+  <CursorWorkbench width="90vw" height="90vh" marginTop={100} />
   <div style={{ height: "100vh" }}>
     {/* Additional content goes here */}
   </div>
