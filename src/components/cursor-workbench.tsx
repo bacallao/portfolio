@@ -6,6 +6,7 @@ import { FileExplorerSidebar } from "@/src/components/file-explorer-sidebar";
 import CursorSidebar from "@/src/components/cursor-sidebar";
 import { CursorTerminal } from "@/src/components/cursor-terminal";
 import EditorFooter from "@/src/components/editor-footer";
+import HeroTop from "@/src/components/hero-top";
 
 interface CursorWorkbenchProps {
   width?: string | number;
@@ -42,7 +43,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
   }, []);
 
   // Calculate transformations based on scroll progress
-  const videoScale = 1 + (2.5 * (1 - scrollProgress)); // 3.5 -> 1
+  const contentScale = 1 + (2.5 * (1 - scrollProgress)); // 3.5 -> 1
 
   // UI elements: start off-screen and move in
   const headerTranslateY = -100 * (1 - scrollProgress);
@@ -84,25 +85,38 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
           transition: scrollProgress > 0.9 ? 'width 0.3s ease-out, height 0.3s ease-out, top 0.3s ease-out' : 'none'
         }}
       >
-      {/* Video layer */}
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        <video
-          aria-label="Background editor video"
-          className="w-full h-full object-cover"
-          style={{
-            transform: `scale(${videoScale})`,
-            transformOrigin: 'center center',
-            transition: 'none'
-          }}
-          src="/videos/video.mov"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+      {/* Background Content Layer (scales during animation) */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          zIndex: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          transform: `scale(${contentScale})`,
+          transformOrigin: 'center center',
+          transition: 'none'
+        }}
+      >
+        {/* Hero Top Section - 50% height */}
+        <div style={{ height: '50%', overflow: 'hidden' }}>
+          <HeroTop />
+        </div>
+
+        {/* Video Section - 50% height */}
+        <div style={{ height: '50%', overflow: 'hidden' }}>
+          <video
+            aria-label="Background editor video"
+            className="w-full h-full object-cover"
+            src="/videos/video.mov"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        </div>
       </div>
       
-      {/* UI layer */}
+      {/* UI layer (overlays both hero and video) */}
       <div className="relative flex flex-col h-full" style={{ zIndex: 1 }}>
         {/* Header */}
         <div 

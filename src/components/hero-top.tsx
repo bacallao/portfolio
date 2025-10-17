@@ -28,7 +28,7 @@ export default function HeroTop() {
   }, []);
 
   return (
-    <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+    <div style={{ position: "relative", height: "100%", width: "100%", overflow: "hidden" }}>
       {/* Gradient Background */}
       <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}>
         <GrainGradient
@@ -40,7 +40,7 @@ export default function HeroTop() {
           intensity={0.15}
           noise={0.5}
           shape="wave"
-          speed={0.06}
+          speed={0.40}
         />
       </div>
 
@@ -56,9 +56,9 @@ export default function HeroTop() {
         padding: "2rem"
       }}>
         <h1 style={{
-          fontSize: "4rem",
+          fontSize: "3rem",
           fontWeight: "bold",
-          marginBottom: "1.5rem",
+          marginBottom: "1rem",
           color: "#ffffff",
           textAlign: "center",
           lineHeight: "1.2"
@@ -67,10 +67,10 @@ export default function HeroTop() {
         </h1>
         
         <p style={{
-          fontSize: "1.25rem",
+          fontSize: "1.1rem",
           color: "#d7cbc6",
           textAlign: "center",
-          marginBottom: "2rem",
+          marginBottom: "1.5rem",
           maxWidth: "600px"
         }}>
           Working to make your ideas come to life your way
