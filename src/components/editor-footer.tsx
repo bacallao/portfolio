@@ -46,9 +46,9 @@ export function EditorFooter({
     <div
       className={cn(
         // Opaque background so underlying content doesn't show through
-        "w-full bg-background text-[11px] text-gray-600",
+        "w-full bg-[#0d1117] text-[11px] text-[#cfd5df]",
         "flex items-center h-7 select-none pr-3",
-        "border", // Add all borders
+        "border border-[#24262d]", // direct border color
         className
       )}
       aria-label="Editor status bar"
@@ -56,7 +56,7 @@ export function EditorFooter({
       {/* Left cluster */}
       <div className="flex items-center gap-3 min-w-0 h-full">
         {/* Celest background behind the separator icon */}
-        <BarItem className="bg-sky-100/80 text-gray-600 px-3">
+        <BarItem className="bg-[#10141b] text-[#9aa0aa] px-3">
           <SeparatorVertical className="h-3.5 w-3.5" />
         </BarItem>
 
@@ -116,7 +116,7 @@ export function EditorFooter({
 
 function BarItem({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1 h-full hover:bg-muted/40 hover:cursor-pointer whitespace-nowrap select-none px-1", className)}>
+    <span className={cn("inline-flex items-center gap-1 h-full hover:bg-[#111318] hover:cursor-pointer whitespace-nowrap select-none px-1 text-[#9aa0aa]", className)}>
       {children}
     </span>
   );

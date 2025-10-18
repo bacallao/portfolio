@@ -66,7 +66,7 @@ export function CursorTerminal({
   return (
     <div
       className={cn(
-        "border-x border-t border-gray-300 bg-card text-gray-600",
+        "border-x border-t border border-neutral-800 bg-[#0d1117] text-muted-foreground",
         "flex h-[160px] min-h-[110px] flex-col overflow-hidden",
         className
       )}
@@ -75,8 +75,8 @@ export function CursorTerminal({
       <div
         className={cn(
           "flex items-center gap-2 px-3",
-          withTopDivider ? "border-b border-gray-300" : null,
-          "bg-background/40"
+          withTopDivider ? "border-b border border-neutral-800" : null,
+          "bg-[#0d1117]"
         )}
       >
         {/* Tabs */}
@@ -90,12 +90,11 @@ export function CursorTerminal({
                 onClick={() => onTabChange?.(tab.id)}
                 className={cn(
                   "group relative inline-flex items-center gap-1 px-2.5 py-1.5 text-xs",
-                  "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                  isActive &&
-                    "bg-secondary text-secondary-foreground hover:bg-secondary"
+                  "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-100",
+                  isActive && "bg-neutral-800 text-neutral-100 hover:bg-neutral-800"
                 )}
               >
-                {tab.icon ? <span className="size-3.5">{tab.icon}</span> : null}
+                {tab.icon ? <span className="size-3.5 text-neutral-400">{tab.icon}</span> : null}
                 <span className="select-none">{tab.label}</span>
               </button>
             );
@@ -105,33 +104,33 @@ export function CursorTerminal({
         <div className="ml-auto flex items-center gap-1 py-2">
           <button
             type="button"
-            className="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs text-gray-600 hover:bg-muted/40 cursor-pointer"
+            className="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs text-muted-foreground hover:bg-muted/40 cursor-pointer"
           >
-            <SquareTerminal className="size-4" />
+            <SquareTerminal className="size-4 text-neutral-400" />
             <span className="select-none">zsh</span>
           </button>
           <button
             type="button"
-            className="inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-xs text-gray-600 hover:bg-muted/40 cursor-pointer"
+            className="inline-flex h-7 items-center gap-1 rounded-md px-1.5 text-xs text-muted-foreground hover:bg-muted/40 cursor-pointer"
             aria-label="New terminal"
           >
-            <Plus className="size-4" />
-            <ChevronDown className="size-3.5" />
+            <Plus className="size-4 text-neutral-400" />
+            <ChevronDown className="size-3.5 text-neutral-400" />
           </button>
           <IconButton ariaLabel="Split">
-            <Columns2 className="size-4" />
+            <Columns2 className="size-4 text-neutral-400" />
           </IconButton>
           <IconButton ariaLabel="Clear">
-            <Trash2 className="size-4" />
+            <Trash2 className="size-4 text-neutral-400" />
           </IconButton>
           <IconButton ariaLabel="More">
-            <Ellipsis className="size-4" />
+            <Ellipsis className="size-4 text-neutral-400" />
           </IconButton>
           <IconButton ariaLabel="Collapse">
-            <ChevronUp className="size-4" />
+            <ChevronUp className="size-4 text-neutral-400" />
           </IconButton>
           <IconButton ariaLabel="Close">
-            <XIcon className="size-4" />
+            <XIcon className="size-4 text-neutral-400" />
           </IconButton>
           {actions}
         </div>
@@ -140,7 +139,7 @@ export function CursorTerminal({
       {/* Terminal Body */}
       <div className="relative flex min-h-0 flex-1">
         {/* Scrollable content area */}
-        <div className="min-w-0 flex-1 overflow-auto bg-background/60">
+        <div className="min-w-0 flex-1 overflow-auto bg-[#0d1117]">
           <div className="px-4 py-3 text-xs leading-relaxed">
             {children ?? (
               <PlaceholderOutput
@@ -153,7 +152,7 @@ export function CursorTerminal({
       </div>
 
       {/* Footer / Status bar */}
-      <div className="bg-background/40 text-[11px] text-muted-foreground">
+      <div className="bg-[#0d1117] text-[11px] text-muted-foreground border-t border-neutral-800">
         {footer ?? (
           <div className="flex items-center justify-center">
             <span>cursor agent to run Agent • ⌘K to generate command</span>
@@ -221,7 +220,7 @@ function BlockCaret({ blinking }: { blinking: boolean }) {
       className={cn(
         "inline-block align-middle ml-1.5",
         "h-[1em] w-[0.55ch]",
-        "bg-foreground/80",
+        "bg-white/90",
         blinking ? "animate-pulse" : undefined
       )}
     />
@@ -232,7 +231,7 @@ function SquiggleCaret({ blinking }: { blinking: boolean }) {
   return (
     <svg
       aria-hidden
-      className={cn("inline-block align-middle ml-1.5 h-[0.7em] w-4 text-foreground/80", blinking ? "animate-pulse" : undefined)}
+      className={cn("inline-block align-middle ml-1.5 h-[0.7em] w-4 text-neutral-400", blinking ? "animate-pulse" : undefined)}
       viewBox="0 0 24 8"
       fill="none"
       stroke="currentColor"

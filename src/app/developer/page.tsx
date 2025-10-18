@@ -11,6 +11,8 @@ export default function DeveloperBase() {
       <div style={{ height: "200vh" }}>
       </div>
       <InfiniteLogoSlider/>
+
+      <img src="/images/editor.png" alt="Logo" />
     </>
   );
 }

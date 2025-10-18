@@ -40,7 +40,7 @@ export default function HeroTop() {
           softness={0.7}
           intensity={0.15}
           noise={0.5}
-          shape="wave"
+          shape="ripple"
           speed={0.90}
         />
       </div>

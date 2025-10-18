@@ -67,14 +67,14 @@ export function FileExplorerSidebar({ className }: FileExplorerSidebarProps) {
     if (item.type === "folder") {
       return (
         <Folder
-          className={cn("h-4 w-4", item.iconColor || "text-gray-600")}
+          className={cn("h-4 w-4", item.iconColor || "text-[#9aa0aa]")}
           fill="currentColor"
         />
       );
     }
     return (
       <FileText
-        className={cn("h-4 w-4", item.iconColor || "text-gray-600")}
+        className={cn("h-4 w-4", item.iconColor || "text-[#9aa0aa]")}
       />
     );
   };
@@ -92,27 +92,27 @@ export function FileExplorerSidebar({ className }: FileExplorerSidebarProps) {
       <div>
         <div
           className={cn(
-            "flex items-center gap-1 py-0.5 px-2 hover:bg-gray-300/50 cursor-pointer group text-sm relative"
+            "flex items-center gap-1 py-0.5 px-2 hover:bg-[#111318] cursor-pointer group text-sm relative"
           )}
           style={{ paddingLeft: `${paddingLeft}px` }}
         >
           {item.type === "folder" && (
             <span className="flex items-center justify-center w-4">
               {item.isExpanded ? (
-                <ChevronDown className="h-3 w-3 text-gray-600" />
+                <ChevronDown className="h-3 w-3 text-[#9aa0aa]" />
               ) : (
-                <ChevronRight className="h-3 w-3 text-gray-600" />
+                <ChevronRight className="h-3 w-3 text-[#9aa0aa]" />
               )}
             </span>
           )}
           {item.type === "file" && <span className="w-4" />}
           <FileIcon item={item} />
-          <span className="text-gray-900 text-sm leading-tight">
+          <span className="text-[#e5e7eb] text-sm leading-tight">
             {item.name}
           </span>
           {item.hasIndicator && (
             <Circle
-              className="h-2 w-2 text-blue-400 ml-auto mr-2"
+              className="h-2 w-2 text-[#60a5fa] ml-auto mr-2"
               fill="currentColor"
             />
           )}
@@ -132,7 +132,7 @@ export function FileExplorerSidebar({ className }: FileExplorerSidebarProps) {
     <aside
       aria-label="File Explorer"
       className={cn(
-        "h-full w-[280px] max-w-full border-r border-l bg-white text-gray-900 border-gray-300",
+        "h-full w-[280px] max-w-full border-r border-l bg-[#0d1117] text-[#e5e7eb] border-[#24262d]",
         "flex flex-col text-sm",
         className
       )}
@@ -142,28 +142,28 @@ export function FileExplorerSidebar({ className }: FileExplorerSidebarProps) {
       <div className="px-3 py-2 flex justify-center items-center gap-1">
         <button
           type="button"
-          className="p-1 hover:bg-gray-300/50 rounded cursor-pointer"
+          className="p-1 hover:bg-[#111318] rounded cursor-pointer"
           aria-label="New File"
         >
-          <Files className="h-4 w-4 text-gray-600" />
+          <Files className="h-4 w-4 text-[#9aa0aa]" />
         </button>
         <button
           type="button"
-          className="p-1 hover:bg-gray-300/50 rounded cursor-pointer"
+          className="p-1 hover:bg-[#111318] rounded cursor-pointer"
           aria-label="New Folder"
         >
-          <Search className="h-4 w-4 text-gray-600" style={{ transform: "rotateY(180deg)" }} />
+          <Search className="h-4 w-4 text-[#9aa0aa]" style={{ transform: "rotateY(180deg)" }} />
         </button>
         <button
           type="button"
-          className="p-1 hover:bg-gray-300/50 rounded cursor-pointer"
+          className="p-1 hover:bg-[#111318] rounded cursor-pointer"
           aria-label="Refresh"
         >
-          <GitFork className="h-4 w-4 text-gray-600" />
+          <GitFork className="h-4 w-4 text-[#9aa0aa]" />
         </button>
         <button
           type="button"
-          className="p-1 hover:bg-gray-300/50 rounded cursor-pointer"
+          className="p-1 hover:bg-[#111318] rounded cursor-pointer"
           aria-label="Cursor"
         >
           <svg
@@ -177,25 +177,25 @@ export function FileExplorerSidebar({ className }: FileExplorerSidebarProps) {
           >
             <path
               fill="currentColor"
-              className="text-gray-600"
+              className="text-[#9aa0aa]"
               d="M22.106 5.68L12.5.135a.998.998 0 00-.998 0L1.893 5.68a.84.84 0 00-.419.726v11.186c0 .3.16.577.42.727l9.607 5.547a.999.999 0 00.998 0l9.608-5.547a.84.84 0 00.42-.727V6.407a.84.84 0 00-.42-.726zm-.603 1.176L12.228 22.92c-.063.108-.228.064-.228-.061V12.34a.59.59 0 00-.295-.51l-9.11-5.26c-.107-.062-.063-.228.062-.228h18.55c.264 0 .428.286.296.514z"
             />
           </svg>
         </button>
         <button
           type="button"
-          className="p-1 hover:bg-gray-300/50 rounded cursor-pointer"
+          className="p-1 hover:bg-[#111318] rounded cursor-pointer"
           aria-label="Collapse All"
         >
-          <ChevronDown className="h-4 w-4 text-gray-600" />
+          <ChevronDown className="h-4 w-4 text-[#9aa0aa]" />
         </button>
       </div>
 
       
       <div className="px-3 py-2 flex items-center justify-between cursor-pointer">
         <div className="flex items-center gap-2">
-          <ChevronDown className="h-4 w-4 text-gray-600" />
-          <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
+          <ChevronDown className="h-4 w-4 text-[#9aa0aa]" />
+          <span className="text-xs font-semibold text-[#9aa0aa] uppercase tracking-wider">
             Project
           </span>
         </div>
@@ -213,16 +213,16 @@ export function FileExplorerSidebar({ className }: FileExplorerSidebarProps) {
       <div className="">
         <div className="px-3 py-2 flex items-center justify-between cursor-pointer">
           <div className="flex items-center gap-2 cursor-pointer">
-            <ChevronRight className="h-4 w-4 text-gray-600" />
-            <span className="text-xs text-gray-600 uppercase tracking-wider">
+          <ChevronRight className="h-4 w-4 text-[#9aa0aa]" />
+          <span className="text-xs text-[#9aa0aa] uppercase tracking-wider">
               Outline
             </span>
           </div>
         </div>
         <div className="px-3 py-2 flex items-center justify-between cursor-pointer">
           <div className="flex items-center gap-2 cursor-pointer">
-            <ChevronRight className="h-4 w-4 text-gray-600" />
-            <span className="text-xs text-gray-600 uppercase tracking-wider">
+          <ChevronRight className="h-4 w-4 text-[#9aa0aa]" />
+          <span className="text-xs text-[#9aa0aa] uppercase tracking-wider">
               Timeline
             </span>
           </div>

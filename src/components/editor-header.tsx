@@ -53,7 +53,7 @@ export function EditorHeader({
   return (
     <div
       className={cn(
-        "relative flex h-10 w-full items-center border border-gray-300 bg-white px-2 text-sm text-gray-600", // add all borders
+        "relative flex h-10 w-full items-center border border-[#24262d] bg-[#0d1117] px-2 text-sm text-[#cfd5df]", // direct dark colors
         className
       )}
       aria-label="Editor title bar"
@@ -71,12 +71,12 @@ export function EditorHeader({
             <ChevronRight className="size-4" />
           </IconButton>
         </div>
-        <div className="flex items-center justify-center bg-white border border-gray-300 rounded-md py-1 min-w-[420px] max-w-full text-gray-600">
+        <div className="flex items-center justify-center bg-[#0f1319] border border-[#24262d] rounded-md py-1 min-w-[420px] max-w-full text-[#cfd5df]">
           <SearchIcon
-            className="size-4 text-muted-foreground mr-2"
+            className="size-4 text-[#9aa0aa] mr-2"
             style={{ transform: "rotateY(180deg)" }}
           />
-          <span className="text-sm font-medium text-gray-600">
+          <span className="text-sm font-medium text-[#cfd5df]">
             {placeholder}
           </span>
         </div>
@@ -121,7 +121,7 @@ function IconButton({
       type="button"
       aria-label={ariaLabel}
       onClick={onClick}
-      className="inline-flex cursor-pointer items-center justify-center rounded-md p-1.5 text-foreground/90 hover:bg-muted/40"
+      className="inline-flex cursor-pointer items-center justify-center rounded-md p-1.5 text-[#9aa0aa] hover:bg-[#111318]"
     >
       <span className="pointer-events-none">{children}</span>
     </button>

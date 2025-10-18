@@ -29,7 +29,7 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
     <aside
       aria-label="Cursor Agent Sidebar"
       className={cn(
-        "h-full w-[280px] max-w-full border-l border-gray-300 bg-white",
+        "h-full w-[280px] max-w-full border-l border border-[#24262d] bg-[#0d1117]",
         "flex flex-col",
         className
       )}
@@ -37,40 +37,40 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
       {/* Header */}
       <div className="px-4 py-1">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold rounded bg-accent px-2 py-1 cursor-pointer group relative inline-flex items-center">
+          <p className="text-xs font-semibold rounded bg-[#10141b] text-[#e5e7eb] border border-[#24262d] px-2 py-1 cursor-pointer group relative inline-flex items-center">
             New Chat
             <span className="transition-all duration-150 w-0 group-hover:w-auto ml-0 group-hover:ml-1 overflow-hidden opacity-0 group-hover:opacity-100 flex items-center">
-              <X className="h-4 w-4 text-muted-foreground" />
+              <X className="h-4 w-4 text-[#9aa0aa]" />
             </span>
           </p>
           <div className="flex items-center">
             <button
               type="button"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-accent cursor-pointer"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-[#111318] cursor-pointer"
               aria-label="New"
             >
-              <Plus className="h-3 w-3 cursor-pointer" />
+              <Plus className="h-3 w-3 text-[#9aa0aa] cursor-pointer" />
             </button>
             <button
               type="button"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-accent cursor-pointer"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-[#111318] cursor-pointer"
               aria-label="History"
             >
-              <HistoryIcon className="h-3 w-3 cursor-pointer" />
+              <HistoryIcon className="h-3 w-3 text-[#9aa0aa] cursor-pointer" />
             </button>
             <button
               type="button"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-accent cursor-pointer"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-[#111318] cursor-pointer"
               aria-label="More"
             >
-              <CopySlash className="h-3 w-3 cursor-pointer" />
+              <CopySlash className="h-3 w-3 text-[#9aa0aa] cursor-pointer" />
             </button>
             <button
               type="button"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-accent cursor-pointer"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-md hover:bg-[#111318] cursor-pointer"
               aria-label="More"
             >
-              <Ellipsis className="h-3 w-3 cursor-pointer" />
+              <Ellipsis className="h-3 w-3 text-[#9aa0aa] cursor-pointer" />
             </button>
           </div>
         </div>
@@ -78,24 +78,24 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
 
       {/* Composer */}
       <div className="px-4">
-        <div className="rounded-xl border bg-white">
+        <div className="rounded-xl border border-[#24262d] bg-[#0f1319]">
           {/* Row 1: Top selectors */}
           <div className="flex items-center gap-2 px-3 pt-2">
             <button
               type="button"
-              className="inline-flex h-6 w-6 items-center justify-center rounded-sm border border-border bg-transparent hover:bg-accent cursor-pointer"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-sm border border-[#2a2e37] bg-transparent hover:bg-[#111318] cursor-pointer"
               aria-label="Attach"
             >
-              <AtSign className="h-3 w-3 cursor-pointer" />
+              <AtSign className="h-3 w-3 text-[#9aa0aa] cursor-pointer" />
             </button>
-            <div className="inline-flex items-center gap-1 px-2 py-1 rounded-sm border text-xs font-medium cursor-pointer">
-              <Files className="h-3 w-3 mr-1 text-muted-foreground" />1 Tab
+            <div className="inline-flex items-center gap-1 px-2 py-1 rounded-sm border border-[#2a2e37] text-xs font-medium text-[#cfd5df] cursor-pointer">
+              <Files className="h-3 w-3 mr-1 text-[#9aa0aa]" />1 Tab
             </div>
             <span
-              className="inline-flex items-center gap-1 px-2 py-1 border border-dashed border-gray-300 rounded-sm text-xs font-medium bg-transparent cursor-pointer"
+              className="inline-flex items-center gap-1 px-2 py-1 border border-dashed border-[#2a2e37] rounded-sm text-xs font-medium text-[#cfd5df] bg-transparent cursor-pointer"
               aria-label="Browse"
             >
-              <Plus className="h-3 w-3" />
+              <Plus className="h-3 w-3 text-[#9aa0aa]" />
               Browse
             </span>
           </div>
@@ -105,23 +105,23 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
             <input
               aria-label="Message"
               placeholder="Plan, search, build anything"
-              className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground cursor-pointer"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-[#6b7280] text-[#e5e7eb] cursor-pointer"
             />
           </div>
 
           {/* Row 3: Infinity icon and submit button */}
           <div className="px-3 pb-2 flex items-center justify-between">
             <div className="flex items-center gap-1">
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-[99px] bg-muted text-accent-foreground font-semibold border-none cursor-pointer">
-                <InfinityIcon className="h-3 w-3" />
-                <Command className="h-3 w-3" />
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-[99px] bg-[#10141b] text-[#d7dee8] font-semibold border-none cursor-pointer">
+                <InfinityIcon className="h-3 w-3 text-[#9aa0aa]" />
+                <Command className="h-3 w-3 text-[#9aa0aa]" />
                 I
-                <ChevronUp className="h-2 w-2" />
+                <ChevronUp className="h-2 w-2 text-[#9aa0aa]" />
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-[99px] bg-muted text-accent-foreground font-semibold border-none cursor-pointer">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-[99px] bg-[#10141b] text-[#e5e7eb] font-semibold border-none cursor-pointer">
                 gpt-5
-                <Brain className="h-3 w-3" />
-                <ChevronUp className="h-2 w-2" />
+                <Brain className="h-3 w-3 text-[#9aa0aa]" />
+                <ChevronUp className="h-2 w-2 text-[#9aa0aa]" />
               </span>
             </div>
             <div className="flex items-center gap-1">
@@ -130,14 +130,14 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
                 className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full cursor-pointer"
                 aria-label="Send"
               >
-                <FileImage className="h-3 w-3 text-muted-foreground hover:text-accent-foreground transition-colors cursor-pointer" />
+                <FileImage className="h-3 w-3 text-[#9aa0aa] hover:text-[#f5f6f7] transition-colors cursor-pointer" />
               </button>
               <button
                 type="button"
-                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border hover:bg-accent cursor-pointer"
+                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#24262d] hover:bg-[#111318] cursor-pointer"
                 aria-label="Send"
               >
-                <ArrowUp className="h-3 w-3 cursor-pointer" />
+                <ArrowUp className="h-3 w-3 text-[#9aa0aa] cursor-pointer" />
               </button>
             </div>
           </div>
@@ -145,8 +145,8 @@ export function CursorSidebar({ className }: CursorSidebarProps) {
       </div>
 
       <div className="mt-auto flex flex-row items-center gap-1 pb-4 pl-4 ml-2">
-        <span className="text-muted-foreground">Past chats</span>
-        <ChevronRight className="h-4 w-4 text-muted-foreground cursor-pointer" />
+        <span className="text-[#9aa0aa]">Past chats</span>
+        <ChevronRight className="h-4 w-4 text-[#9aa0aa] cursor-pointer" />
       </div>
     </aside>
   );
