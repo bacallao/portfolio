@@ -181,7 +181,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
                 pointerEvents: 'auto'
               }}
             >
-              <InfiniteLogoSlider />
+              <InfiniteLogoSlider scrollProgress={scrollProgress} />
             </div>
           </div>
         </div>
