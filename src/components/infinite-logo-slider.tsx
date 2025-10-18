@@ -42,8 +42,8 @@ export function InfiniteLogoSlider({ width, height, scrollProgress = 1 }: Infini
   const logoHeightEnd = 28 // px - final size (h-7)
   const logoHeight = logoHeightStart + (logoHeightEnd - logoHeightStart) * scrollProgress
 
-  const paddingYStart = 48 // px - fullscreen (py-12)
-  const paddingYEnd = 16 // px - final size (py-4)
+  const paddingYStart = 20 // px - fullscreen (py-12)
+  const paddingYEnd = 10 // px - final size (py-4)
   const paddingY = paddingYStart + (paddingYEnd - paddingYStart) * scrollProgress
 
   const spacingXStart = 32 // px - fullscreen (mx-8)
@@ -63,10 +63,8 @@ export function InfiniteLogoSlider({ width, height, scrollProgress = 1 }: Infini
   
   return (
     <div 
-      className="relative overflow-hidden"
+      className="w-full overflow-hidden"
       style={{ 
-        width: containerWidth, 
-        height: containerHeight,
         paddingTop: `${paddingY}px`,
         paddingBottom: `${paddingY}px`
       }}

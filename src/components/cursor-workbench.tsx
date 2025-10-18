@@ -94,7 +94,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
   return (
     <div 
       ref={containerRef}
-      className={className}
+      className={className }
       style={{
         position: 'relative',
         // Ensure animation completes fully: 100vh for sticky element + 100vh of scroll distance
@@ -140,48 +140,54 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
 
           {/* Video Section - 50% height */}
           <div style={{ height: '50%', overflow: 'hidden', position: 'relative' }}>
+            {/* Video Background */}
             <video
               ref={videoRef}
               aria-label="Background editor video"
-              className="w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
               src="/videos/video.mov"
               autoPlay
               loop
               muted
               playsInline
             />
-            {/* Play/Pause Button - Top Right */}
-            <button
-              onClick={toggleVideo}
-              className="absolute top-4 right-4 bg-white hover:bg-gray-100 text-black rounded p-2 transition-all duration-200 shadow-lg"
-              style={{ zIndex: 10 }}
-              aria-label={isVideoPlaying ? "Pause video" : "Play video"}
-            >
-              {isVideoPlaying ? (
-                // Pause Icon
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <rect x="6" y="4" width="4" height="16" />
-                  <rect x="14" y="4" width="4" height="16" />
-                </svg>
-              ) : (
-                // Play Icon
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              )}
-            </button>
-            {/* Infinite Logo Slider overlay on video */}
+            
+            {/* Overlay Content - Flex Layout */}
             <div 
-              style={{ 
-                position: 'absolute', 
-                top: 0, 
-                left: 0, 
-                right: 0,
-                zIndex: 1,
-                pointerEvents: 'auto'
-              }}
+              className="absolute inset-0 flex flex-col"
+              style={{ zIndex: 1 }}
             >
-              <InfiniteLogoSlider scrollProgress={scrollProgress} />
+              {/* Top Section - Button and Carousel Row */}
+              <div className="flex justify-between items-start pt-3 px-3 pb-0">
+                {/* Spacer for left alignment */}
+                <div style={{ flex: 1 }} />
+                
+                {/* Top Right - Play/Pause Button */}
+                <button
+                  onClick={toggleVideo}
+                  className="bg-white hover:bg-gray-100 text-black rounded p-1.5 shadow-lg"
+                  style={{ pointerEvents: 'auto' }}
+                  aria-label={isVideoPlaying ? "Pause video" : "Play video"}
+                >
+                  {isVideoPlaying ? (
+                    // Pause Icon
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="6" y="4" width="4" height="16" />
+                      <rect x="14" y="4" width="4" height="16" />
+                    </svg>
+                  ) : (
+                    // Play Icon
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+              
+              {/* Carousel Below */}
+              <div style={{ position: 'relative' }}>
+                <InfiniteLogoSlider scrollProgress={scrollProgress} />
+              </div>
             </div>
           </div>
         </div>
