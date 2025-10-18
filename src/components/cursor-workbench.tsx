@@ -7,6 +7,7 @@ import CursorSidebar from "@/src/components/cursor-sidebar";
 import { CursorTerminal } from "@/src/components/cursor-terminal";
 import EditorFooter from "@/src/components/editor-footer";
 import HeroTop from "@/src/components/hero-top";
+import { InfiniteLogoSlider } from "@/src/components/infinite-logo-slider";
 
 interface CursorWorkbenchProps {
   width?: string | number;
@@ -115,7 +116,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
         </div>
 
         {/* Video Section - 50% height */}
-        <div style={{ height: '50%', overflow: 'hidden' }}>
+        <div style={{ height: '50%', overflow: 'hidden', position: 'relative' }}>
           <video
             aria-label="Background editor video"
             className="w-full h-full object-cover"
@@ -125,6 +126,19 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
             muted
             playsInline
           />
+          {/* Infinite Logo Slider overlay on video */}
+          <div 
+            style={{ 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              right: 0,
+              zIndex: 1,
+              pointerEvents: 'auto'
+            }}
+          >
+            <InfiniteLogoSlider />
+          </div>
         </div>
       </div>
       

@@ -35,23 +35,39 @@ export function InfiniteLogoSlider({ width, height }: InfiniteLogoSliderProps = 
   const containerWidth = width || "100%"
   const containerHeight = height || "auto"
 
+  // Helper to get SVG icon CDN url for color mode
+  function getLogoUrl(slug: string, mode: "dark" | "colored") {
+    // For dark mode: use white color for visibility on dark background
+    // For colored: use default brand colors
+    if (mode === "dark") {
+      return `https://cdn.simpleicons.org/${slug}/white`
+    } else {
+      return `https://cdn.simpleicons.org/${slug}`
+    }
+  }
+  
   return (
     <div 
       className="relative overflow-hidden py-12"
       style={{ width: containerWidth, height: containerHeight }}
     >
-      {/* Blur gradient overlays */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-
       {/* Scrolling container */}
       <div className="flex animate-infinite-scroll hover:[animation-play-state:paused]">
         {duplicatedLogos.map((logo, index) => (
           <div key={`${logo.name}-${index}`} className="flex-shrink-0 mx-8 flex items-center justify-center group">
+            {/* Darkmode logo visible by default, fades out on hover */}
             <img
-              src={`https://cdn.simpleicons.org/${logo.slug}`}
+              src={getLogoUrl(logo.slug, "dark")}
               alt={logo.name}
-              className="h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0"
+              className="h-12 w-auto object-contain opacity-80 transition-all duration-300 grayscale group-hover:opacity-0 group-hover:grayscale-0 absolute"
+              style={{ position: "absolute" }}
+            />
+            {/* Colored logo visible on hover */}
+            <img
+              src={getLogoUrl(logo.slug, "colored")}
+              alt={logo.name}
+              className="h-12 w-auto object-contain opacity-0 transition-all duration-300 grayscale-0 group-hover:opacity-100 group-hover:grayscale-0 relative"
+              style={{ position: "relative" }}
             />
           </div>
         ))}
