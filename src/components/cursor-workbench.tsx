@@ -42,9 +42,6 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate transformations based on scroll progress
-  const contentScale = 1 + (2.5 * (1 - scrollProgress)); // 3.5 -> 1
-
   // UI elements: start off-screen and move in
   const headerTranslateY = -100 * (1 - scrollProgress);
   const footerTranslateY = 100 * (1 - scrollProgress);
@@ -53,10 +50,28 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
   const terminalTranslateY = 100 * (1 - scrollProgress);
   const elementsOpacity = scrollProgress;
 
-  // Container dimensions: transition from fullscreen to specified dimensions
-  const containerWidth = scrollProgress === 1 ? width : '100vw';
-  const containerHeight = scrollProgress === 1 ? height : '100vh';
-  const containerMarginTop = scrollProgress === 1 ? marginTop : 0;
+  // Container dimensions: smoothly transition from fullscreen to specified dimensions
+  const getInterpolatedValue = (start: string | number, end: string | number) => {
+    // Parse viewport units
+    const parseValue = (val: string | number): { value: number; unit: string } => {
+      if (typeof val === 'number') return { value: val, unit: 'px' };
+      const match = String(val).match(/^([\d.]+)(.*)$/);
+      return match ? { value: parseFloat(match[1]), unit: match[2] } : { value: 0, unit: '' };
+    };
+    
+    const startParsed = parseValue(start);
+    const endParsed = parseValue(end);
+    
+    // Interpolate the numeric value
+    const interpolated = startParsed.value + (endParsed.value - startParsed.value) * scrollProgress;
+    return `${interpolated}${endParsed.unit || startParsed.unit}`;
+  };
+
+  const containerWidth = getInterpolatedValue('100vw', width);
+  const containerHeight = getInterpolatedValue('100vh', height);
+  const containerMarginTop = typeof marginTop === 'number' 
+    ? marginTop * scrollProgress 
+    : getInterpolatedValue(0, marginTop);
 
   return (
     <div 
@@ -82,19 +97,16 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
           marginRight: 'auto',
           backgroundColor: 'black',
           overflow: 'hidden',
-          transition: scrollProgress > 0.9 ? 'width 0.3s ease-out, height 0.3s ease-out, top 0.3s ease-out' : 'none'
+          transition: 'none'
         }}
       >
-      {/* Background Content Layer (scales during animation) */}
+      {/* Background Content Layer */}
       <div 
         className="absolute inset-0"
         style={{
           zIndex: 0,
           display: 'flex',
-          flexDirection: 'column',
-          transform: `scale(${contentScale})`,
-          transformOrigin: 'center center',
-          transition: 'none'
+          flexDirection: 'column'
         }}
       >
         {/* Hero Top Section - 50% height */}
@@ -187,5 +199,3 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
     </div>
   );
 }
-
-

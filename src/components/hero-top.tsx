@@ -40,7 +40,7 @@ export default function HeroTop() {
           intensity={0.15}
           noise={0.5}
           shape="wave"
-          speed={0.40}
+          speed={0.90}
         />
       </div>
 
@@ -56,9 +56,9 @@ export default function HeroTop() {
         padding: "2rem"
       }}>
         <h1 style={{
-          fontSize: "3rem",
+          fontSize: "3.5rem",
           fontWeight: "bold",
-          marginBottom: "1rem",
+          marginBottom: "1.5rem",
           color: "#ffffff",
           textAlign: "center",
           lineHeight: "1.2"
@@ -67,10 +67,10 @@ export default function HeroTop() {
         </h1>
         
         <p style={{
-          fontSize: "1.1rem",
+          fontSize: "1.25rem",
           color: "#d7cbc6",
           textAlign: "center",
-          marginBottom: "1.5rem",
+          marginBottom: "2rem",
           maxWidth: "600px"
         }}>
           Working to make your ideas come to life your way

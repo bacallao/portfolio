@@ -153,6 +153,10 @@
   .animate-scroll-right {
     animation: scroll-right 20s linear infinite;
   }
+
+  .animate-infinite-scroll {
+    animation: scroll-left 30s linear infinite;
+  }
 }
 
 
