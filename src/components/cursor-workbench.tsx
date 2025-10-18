@@ -18,8 +18,10 @@ interface CursorWorkbenchProps {
 
 export default function CursorWorkbench({ width = '90vw', height = '90vh', marginTop = 0, className }: CursorWorkbenchProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,6 +76,21 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
     ? marginTop * scrollProgress 
     : getInterpolatedValue(0, marginTop);
 
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (isVideoPlaying) {
+        videoRef.current.pause();
+        setIsVideoPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsVideoPlaying(true);
+      }
+    }
+  };
+
+  // Sidebar spacers: 0px at fullscreen, 280px when animation completes
+  const sidebarSpacerWidth = 280 * scrollProgress;
+
   return (
     <div 
       ref={containerRef}
@@ -103,47 +120,81 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
       >
       {/* Background Content Layer */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 flex"
         style={{
-          zIndex: 0,
-          display: 'flex',
-          flexDirection: 'column'
+          zIndex: 0
         }}
       >
-        {/* Hero Top Section - 50% height */}
-        <div style={{ height: '50%', overflow: 'hidden' }}>
-          <HeroTop />
-        </div>
+        {/* Left sidebar spacer - animated from 0 to 280px - hidden on smaller screens */}
+        <div 
+          className="hidden lg:block shrink-0" 
+          style={{ width: `${sidebarSpacerWidth}px` }}
+        />
+        
+        {/* Center content - Hero and Video */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Hero Top Section - 50% height */}
+          <div style={{ height: '50%', overflow: 'hidden' }}>
+            <HeroTop />
+          </div>
 
-        {/* Video Section - 50% height */}
-        <div style={{ height: '50%', overflow: 'hidden', position: 'relative' }}>
-          <video
-            aria-label="Background editor video"
-            className="w-full h-full object-cover"
-            src="/videos/video.mov"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          {/* Infinite Logo Slider overlay on video */}
-          <div 
-            style={{ 
-              position: 'absolute', 
-              top: 0, 
-              left: 0, 
-              right: 0,
-              zIndex: 1,
-              pointerEvents: 'auto'
-            }}
-          >
-            <InfiniteLogoSlider />
+          {/* Video Section - 50% height */}
+          <div style={{ height: '50%', overflow: 'hidden', position: 'relative' }}>
+            <video
+              ref={videoRef}
+              aria-label="Background editor video"
+              className="w-full h-full object-cover"
+              src="/videos/video.mov"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            {/* Play/Pause Button - Top Right */}
+            <button
+              onClick={toggleVideo}
+              className="absolute top-4 right-4 bg-white hover:bg-gray-100 text-black rounded p-2 transition-all duration-200 shadow-lg"
+              style={{ zIndex: 10 }}
+              aria-label={isVideoPlaying ? "Pause video" : "Play video"}
+            >
+              {isVideoPlaying ? (
+                // Pause Icon
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </svg>
+              ) : (
+                // Play Icon
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </button>
+            {/* Infinite Logo Slider overlay on video */}
+            <div 
+              style={{ 
+                position: 'absolute', 
+                top: 0, 
+                left: 0, 
+                right: 0,
+                zIndex: 1,
+                pointerEvents: 'auto'
+              }}
+            >
+              <InfiniteLogoSlider />
+            </div>
           </div>
         </div>
+
+        {/* Right sidebar spacer - animated from 0 to 280px - hidden on smaller screens */}
+        <div 
+          className="hidden lg:block shrink-0" 
+          style={{ width: `${sidebarSpacerWidth}px` }}
+        />
       </div>
       
       {/* UI layer (overlays both hero and video) */}
-      <div className="relative flex flex-col h-full" style={{ zIndex: 1, pointerEvents: 'none' }}>
+      <div className="relative flex flex-col h-full" style={{ zIndex: 2, pointerEvents: 'none' }}>
         {/* Header */}
         <div 
           style={{

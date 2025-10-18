@@ -59,14 +59,14 @@ export function InfiniteLogoSlider({ width, height }: InfiniteLogoSliderProps = 
             <img
               src={getLogoUrl(logo.slug, "dark")}
               alt={logo.name}
-              className="h-12 w-auto object-contain opacity-80 transition-all duration-300 grayscale group-hover:opacity-0 group-hover:grayscale-0 absolute"
+              className="h-10 w-auto object-contain opacity-80 transition-all duration-300 grayscale group-hover:opacity-0 group-hover:grayscale-0 absolute"
               style={{ position: "absolute" }}
             />
             {/* Colored logo visible on hover */}
             <img
               src={getLogoUrl(logo.slug, "colored")}
               alt={logo.name}
-              className="h-12 w-auto object-contain opacity-0 transition-all duration-300 grayscale-0 group-hover:opacity-100 group-hover:grayscale-0 relative"
+              className="h-10 w-auto object-contain opacity-0 transition-all duration-300 grayscale-0 group-hover:opacity-100 group-hover:grayscale-0 relative"
               style={{ position: "relative" }}
             />
           </div>
