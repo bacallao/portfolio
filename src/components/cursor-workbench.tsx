@@ -129,26 +129,28 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
       </div>
       
       {/* UI layer (overlays both hero and video) */}
-      <div className="relative flex flex-col h-full" style={{ zIndex: 1 }}>
+      <div className="relative flex flex-col h-full" style={{ zIndex: 1, pointerEvents: 'none' }}>
         {/* Header */}
         <div 
           style={{
             transform: `translateY(${headerTranslateY}%)`,
             opacity: 1,
-            transition: 'none'
+            transition: 'none',
+            pointerEvents: 'auto'
           }}
         >
           <EditorHeader />
         </div>
 
         {/* Middle row: left sidebar, center content, right sidebar */}
-        <div className="flex flex-1 min-h-0 overflow-hidden">
+        <div className="flex flex-1 min-h-0 overflow-hidden" style={{ pointerEvents: 'none' }}>
           {/* Left sidebar */}
           <div
             style={{
               transform: `translateX(${leftSidebarTranslateX}%)`,
               opacity: 1,
-              transition: 'none'
+              transition: 'none',
+              pointerEvents: 'auto'
             }}
             className="hidden lg:flex"
           >
@@ -156,7 +158,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
           </div>
 
           {/* Center column */}
-          <div className="flex min-w-0 flex-1 flex-col relative">
+          <div className="flex min-w-0 flex-1 flex-col relative" style={{ pointerEvents: 'none' }}>
             {/* Terminal */}
             <div 
               className="mt-auto shrink-0 relative"
@@ -164,7 +166,8 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
                 transform: `translateY(${terminalTranslateY}%)`,
                 opacity: 1,
                 transition: 'none',
-                zIndex: 1
+                zIndex: 1,
+                pointerEvents: 'auto'
               }}
             >
               <CursorTerminal />
@@ -176,7 +179,8 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
             style={{
               transform: `translateX(${rightSidebarTranslateX}%)`,
               opacity: 1,
-              transition: 'none'
+              transition: 'none',
+              pointerEvents: 'auto'
             }}
             className="hidden lg:flex"
           >
@@ -189,7 +193,8 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
           style={{
             transform: `translateY(${footerTranslateY}%)`,
             opacity: 1,
-            transition: 'none'
+            transition: 'none',
+            pointerEvents: 'auto'
           }}
         >
           <EditorFooter />

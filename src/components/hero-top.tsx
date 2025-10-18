@@ -1,6 +1,7 @@
 "use client";
 
 import { GrainGradient } from '@paper-design/shaders-react';
+import Link from 'next/link';
 import React, { useState, useEffect } from "react";
 
 export default function HeroTop() {
@@ -77,7 +78,7 @@ export default function HeroTop() {
         </p>
 
         <div style={{ display: "flex", gap: "1rem" }}>
-          <button style={{
+          <Link href="/projects" style={{
             padding: "0.75rem 2rem",
             fontSize: "1rem",
             fontWeight: "600",
@@ -85,12 +86,16 @@ export default function HeroTop() {
             color: "#000a0f",
             border: "none",
             borderRadius: "8px",
-            cursor: "pointer"
+            cursor: "pointer",
+            textDecoration: "none",
+            display: "inline-block",
+            position: "relative",
+            zIndex: 10
           }}>
-            Portfolio
-          </button>
+            Projects
+          </Link>
           
-          <button style={{
+          <Link href="/contact" style={{
             padding: "0.75rem 2rem",
             fontSize: "1rem",
             fontWeight: "600",
@@ -98,10 +103,14 @@ export default function HeroTop() {
             color: "#ffffff",
             border: "2px solid #ffffff",
             borderRadius: "8px",
-            cursor: "pointer"
+            cursor: "pointer",
+            textDecoration: "none",
+            display: "inline-block",
+            position: "relative",
+            zIndex: 10
           }}>
             Contact
-          </button>
+          </Link>
         </div>
       </div>
     </div>
