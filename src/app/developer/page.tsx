@@ -6,13 +6,11 @@ import { InfiniteLogoSlider } from "@/src/components/infinite-logo-slider";
 
 export default function DeveloperBase() {
   return (
-    <>
+    <div className="bg-black">
       <CursorWorkbench width="90vw" height="90vh" marginTop={100} />
       <div style={{ height: "200vh" }}>
       </div>
-      <InfiniteLogoSlider/>
 
-      <img src="/images/editor.png" alt="Logo" />
-    </>
+    </div>
   );
 }

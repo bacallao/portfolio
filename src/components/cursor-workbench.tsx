@@ -94,7 +94,7 @@ export default function CursorWorkbench({ width = '90vw', height = '90vh', margi
   return (
     <div 
       ref={containerRef}
-      className={className }
+      className={`${className ? " " + className : ""}`}
       style={{
         position: 'relative',
         // Ensure animation completes fully: 100vh for sticky element + 100vh of scroll distance
