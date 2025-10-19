@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import "./globals.css"
+import { SiteHeader } from "@/src/components/site-header"
 
 const geist = Geist({
   subsets: ["latin"],
@@ -22,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <SiteHeader />
+        <div className="bg-black">{children}</div>
+      </body>
     </html>
   )
 }
