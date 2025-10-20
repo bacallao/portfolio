@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 
 export function SiteHeader() {
   return (
@@ -9,8 +10,23 @@ export function SiteHeader() {
         {/* Left group: Brand + primary navigation */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-3">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-blue-600 text-white text-sm font-bold">MB</span>
-            <span className="text-white font-semibold tracking-tight text-lg">Manuel</span>
+            <Image 
+              src="/images/logo.svg" 
+              alt="Metrica Logo" 
+              width={28} 
+              height={28}
+              className="h-7 w-7 object-contain"
+              style={{ filter: 'brightness(0) saturate(100%) invert(38%) sepia(99%) saturate(2529%) hue-rotate(216deg) brightness(96%) contrast(90%)' }}
+            />
+            <span
+              className="text-white font-semibold text-lg"
+              style={{
+                fontFamily: '"BBH Sans Hegarty", sans-serif',
+                letterSpacing: "0.02em"
+              }}
+            >
+              Metrica
+            </span>
             <span className="sr-only">Home</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-base text-white/90 font-semibold">
