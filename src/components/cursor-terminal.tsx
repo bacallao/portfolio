@@ -183,7 +183,7 @@ function PlaceholderOutput({
           boxSizing: "border-box",
         }}
       />
-      <span className="leading-none">valuedev@MacBook-Pro project % </span>
+      <span className="leading-none">Metrica@MacBook-Pro project % </span>
       {caretStyle === "squiggle" ? (
         <SquiggleCaret blinking={caretBlink} />
       ) : (

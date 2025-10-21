@@ -74,7 +74,7 @@ export default function HeroTop() {
           marginBottom: "2rem",
           maxWidth: "600px"
         }}>
-          Working to make your ideas come to life your way
+          Helping you take your ideas to life. With the power of new AI era.
         </p>
 
         <div style={{ display: "flex", gap: "1rem" }}>
