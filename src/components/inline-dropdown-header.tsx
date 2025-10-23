@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { BarChart3, Bell, ChevronDown, Shield, Sparkles, Users, Zap } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import {
   DropdownMenu,
@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { StickyScroll } from "./sticky-scroll";
+import { ScrollFeatureShowcase, FeatureSection } from "./scroll-feature-showcase";
 
 const serviceOptions = [
   { id: "marketing", label: "Marketing teams" },
@@ -26,52 +26,78 @@ export default function InlineDropdownHeader() {
     setSelectedOption(option);
   };
 
-  const content = [
+  const featureSections: FeatureSection[] = [
     {
-      title: "Collaborative Editing",
+      id: "section-1",
+      title: "Overflowing with useful features",
       description:
-        "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
-      content: (
-        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-          Collaborative Editing
-        </div>
-      ),
+        "Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups.",
+      defaultImage: "/v0/purple-credit-cards-stacked.jpg",
+      elements: [
+        {
+          id: "feature-1",
+          icon: <Bell className="h-5 w-5" />,
+          title: "Share team inboxes",
+          description:
+            "Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop.",
+          image: "/v0/inbox-notification-interface-purple.jpg", // Has specific image
+          link: "#",
+        },
+        {
+          id: "feature-2",
+          icon: <Zap className="h-5 w-5" />,
+          title: "Deliver instant answers",
+          description:
+            "An all-in-one customer service platform that helps you balance everything your customers need to be happy.",
+          image: "/v0/chat-support-interface-purple.jpg", // Has specific image
+          link: "#",
+        },
+        {
+          id: "feature-3",
+          icon: <BarChart3 className="h-5 w-5" />,
+          title: "Manage your team with reports",
+          description:
+            "Measure what matters with Untitled's easy-to-use reports. You can filter, export, and drilldown on the data in a couple clicks.",
+          image: "/v0/analytics-dashboard-purple-charts.jpg", // Has specific image
+          link: "#",
+        },
+      ],
     },
     {
-      title: "Real time changes",
+      id: "section-2",
+      title: "Advanced collaboration tools",
       description:
-        "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
-      content: (
-        <div className="flex h-full w-full items-center justify-center text-white">
-          <img
-            src="/linear.webp"
-            width={300}
-            height={300}
-            className="h-full w-full object-cover"
-            alt="linear board demo"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "Version control",
-      description:
-        "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-      content: (
-        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-          Version control
-        </div>
-      ),
-    },
-    {
-      title: "Running out of content",
-      description:
-        "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-      content: (
-        <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-          Running out of content
-        </div>
-      ),
+        "Work together seamlessly with powerful collaboration features designed for modern teams.",
+      defaultImage: "/v0/blue-collaboration-workspace.jpg",
+      elements: [
+        {
+          id: "feature-4",
+          icon: <Users className="h-5 w-5" />,
+          title: "Team collaboration",
+          description:
+            "Real-time collaboration tools that keep your team in sync and productive.",
+          image: "/v0/team-video-call-interface-blue.jpg", // Has specific image
+          link: "#",
+        },
+        {
+          id: "feature-5",
+          icon: <Shield className="h-5 w-5" />,
+          title: "Enterprise security",
+          description:
+            "Bank-level security with advanced encryption and compliance certifications.",
+          // No image property - will use section's defaultImage
+          link: "#",
+        },
+        {
+          id: "feature-6",
+          icon: <Sparkles className="h-5 w-5" />,
+          title: "AI-powered insights",
+          description:
+            "Get intelligent recommendations and insights powered by advanced AI.",
+          image: "/v0/ai-neural-network-blue.png", // Has specific image
+          link: "#",
+        },
+      ],
     },
   ];
 
@@ -143,9 +169,7 @@ export default function InlineDropdownHeader() {
           </div>
         </div>
       </div>
-      
-      {/* Sticky Scroll Section - flows naturally with page scroll */}
-      <StickyScroll content={content} />
+      <ScrollFeatureShowcase sections={featureSections} />
     </section>
   );
 }
