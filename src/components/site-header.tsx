@@ -5,8 +5,8 @@ import Image from "next/image"
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/40 bg-black" style={{ borderBottomWidth: "1px" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-black" style={{ borderBottomWidth: "1px" }}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-[3.9rem] flex items-center justify-between">
         {/* Left group: Brand + primary navigation */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-3">
@@ -32,9 +32,7 @@ export function SiteHeader() {
           <nav className="hidden md:flex items-center gap-8 text-base text-white/90 font-semibold">
             <Link href="#platform" className="hover:text-white transition-colors">Platform</Link>
             <Link href="#solutions" className="hover:text-white transition-colors">Solutions</Link>
-            <Link href="#resources" className="hover:text-white transition-colors">Resources</Link>
-            <Link href="#enterprise" className="hover:text-white transition-colors">Enterprise</Link>
-            <Link href="#pricing" className="hover:text-white transition-colors">Pricing</Link>
+            <Link href="/developer" className="hover:text-white transition-colors">Portfolio</Link>
           </nav>
         </div>
 

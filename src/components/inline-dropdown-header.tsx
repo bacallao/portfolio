@@ -106,7 +106,7 @@ export default function InlineDropdownHeader() {
       {/* Header Section */}
       <div className="max-w-7xl mx-auto px-4 py-20">
         <div className="flex flex-col items-start justify-center">
-          <div className="flex flex-wrap items-center gap-4 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-[0.8]">
+          <div className="flex flex-wrap items-center gap-4 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-[0.8]" style={{ fontFamily: '"WF Visual Sans", sans-serif' }}>
             {/* Pre-text */}
             <span>Everything</span>
 
@@ -162,10 +162,8 @@ export default function InlineDropdownHeader() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <br />
-
-            {/* Post-text */}
-            <span className="leading-tight">love about Metrica</span>
+            {/* Post-text - forces line break */}
+            <span className="w-full leading-tight">love about Metrica</span>
           </div>
         </div>
       </div>
